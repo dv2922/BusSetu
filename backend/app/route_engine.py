@@ -1,7 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 
-from .seed_data import ALIASES, HUBS, SERVICES, STOPS
+from .seed_data import ALIASES, HUBS, SERVICES as SEED_SERVICES, STOPS
+from .csv_loader import load_csv_services
+
+SERVICES = SEED_SERVICES + load_csv_services()
 
 MIN_TRANSFER = timedelta(minutes=45)
 MAX_TRANSFER = timedelta(hours=4)
@@ -34,6 +37,9 @@ def minutes_between(date: str, departure: str, arrival: str) -> int:
 
 
 def estimate_fare(service: Dict, duration_minutes: int) -> int:
+    if "fixed_fare" in service:
+        return int(float(service["fixed_fare"]))
+
     # MVP approximation: longer and premium services cost more.
     # Assumption: average road speed ~45 km/h.
     approx_km = max(8, duration_minutes * 0.75)

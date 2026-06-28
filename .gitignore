@@ -1,34 +1,23 @@
-# -----------------
 # Python
-# -----------------
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.so
-
-# Virtual environments
 .venv/
 venv/
 env/
 ENV/
-
-# Python build artifacts
+.pytest_cache/
+.mypy_cache/
 build/
 dist/
 *.egg-info/
-.pytest_cache/
-.mypy_cache/
-.coverage
-htmlcov/
 
-# Environment variables
+# Environment
 .env
 .env.local
 
-# -----------------
 # Node / Next.js
-# -----------------
 node_modules/
 .next/
 out/
@@ -36,29 +25,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# -----------------
-# VS Code
-# -----------------
+# Editors / OS
 .vscode/
-
-# -----------------
-# OS files
-# -----------------
 .DS_Store
 Thumbs.db
 
-# -----------------
-# Logs
-# -----------------
+# Logs / platform
 *.log
-
-# -----------------
-# Render / Vercel local artifacts
-# -----------------
 .vercel/
-
-# -----------------
-# Misc
-# -----------------
-temp/
-tmp/

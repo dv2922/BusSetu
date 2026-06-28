@@ -3,7 +3,7 @@ from datetime import date as date_cls, timedelta
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from .route_engine import find_routes
+from .route_engine import SERVICES, find_routes
 from .seed_data import STOPS
 
 app = FastAPI(
@@ -42,7 +42,14 @@ def health_check():
 
 @app.get("/api/stops")
 def get_stops():
-    return {"stops": sorted(STOPS)}
+    all_stops = set(STOPS)
+
+    for service in SERVICES:
+        for stop in service.get("stops", []):
+            if stop and stop[0]:
+                all_stops.add(stop[0])
+
+    return {"stops": sorted(all_stops)}
 
 
 @app.get("/api/search")
